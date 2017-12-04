@@ -1,17 +1,51 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      delta-pouch
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+
+  <ion-list *ngIf="sites">
+    <!--<ion-list-header><h1>Websites</h1></ion-list-header>-->
+    <ion-item>count: {{sites.length}}</ion-item>
+    <ion-item *ngFor="let site of sites">
+
+      Name:{{site.name}} URL: {{site.url}}
+      <button ion-button item-right (click)="editSite(site.$id)">Edit</button>
+      <button ion-button item-right (click)="removeSite(site.$id)">Delete</button>
     </ion-item>
+
+    <ion-item-divider text-center> --</ion-item-divider>
+    <ion-item>
+      <button ion-button id="newButton" (click)="editSite()">New</button>
+    </ion-item>
+    <form id="form" [formGroup]="form" style="display:none;">
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input
+          formControlName="name"
+          type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>URL</ion-label>
+        <ion-input
+          formControlName="url"
+          type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button danger (click)="saveSite()">Save</button>
+      </ion-item>
+    </form>
+    <ion-item>
+      <button (click)="cleanup()">Cleanup</button>
+      <button (click)="doPurge()">Purge</button>
+    </ion-item>
+
+
   </ion-list>
 </ion-content>
