@@ -303,7 +303,7 @@ export class HomePage {
       })
 
       .on('paused', function (err) {
-        console.log('DB pouch db paused');
+        console.log('DB pouch _db paused');
       })
       .on('active', function () {
         // replicate resumed (e.g. new changes replicating, user went back online)
@@ -311,10 +311,10 @@ export class HomePage {
       })
       .on('denied', function (err) {
         // a document failed to replicate (e.g. due to permissions)
-        console.log('DB pouch db denied', err)
+        console.log('DB pouch _db denied', err)
       })
       .on('error', function (err) {
-        console.log('DB pouch db error', err);
+        console.log('DB pouch _db error', err);
       });
   }
 
@@ -553,7 +553,7 @@ export class HomePage {
     console.log('get');
     const db = this._db;
     return new Promise((resolve, reject) => {
-      if (!db) return reject('no db');
+      if (!db) return reject('no _db');
       db.get(id)
         .then(function (data) {
           console.log('got:', data);

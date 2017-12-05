@@ -1,40 +1,65 @@
-<!--<ion-header>-->
-  <!--<ion-navbar>-->
-    <!--<ion-title>-->
-      <!--DELTA-->
-    <!--</ion-title>-->
-  <!--</ion-navbar>-->
-<!--</ion-header>-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      delta-pouch
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-<!--<ion-content padding>-->
-  <!--<button ion-button (click)="destroy()">destroyDB</button>-->
-  <!--<button ion-button (click)="initDB()">initDB</button>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<button ion-button (click)="startSyncDB()">Start Sync ALL</button>-->
-  <!--<button ion-button (click)="stopSyncDB()">Stop Sync ALL</button>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<button ion-button (click)="startSyncDoc('test')">Start Sync Doc</button>-->
-  <!--<button ion-button (click)="stopSyncDoc()">Stop SyncDoc</button>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<button ion-button (click)="replicateToCouch()">ReplicateToCouch</button>-->
-  <!--<button ion-button (click)="replicateFromCouch()">ReplicateFromCouch</button>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<button ion-button (click)="create()">create</button>-->
-  <!--<button ion-button (click)="update()">update</button>-->
-  <!--<button ion-button (click)="del()">delete</button>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<hr>-->
-  <!--<button ion-button (click)="show()">show</button>-->
-  <!--<ion-item *ngIf="data">-->
-    <!--{{data}}-->
-  <!--</ion-item>-->
+<ion-content>
 
-<!--</ion-content>-->
+  <button ion-button (click)="destroy()">destroyDB</button>
+  <button ion-button (click)="initDB()">initDB</button>
+  <hr>
+  <hr>
+  <hr>
+  <button ion-button (click)="startSyncDB()">Start Sync ALL</button>
+  <button ion-button (click)="stopSyncDB()">Stop Sync ALL</button>
+  <hr>
+  <hr>
+  <button ion-button (click)="startSyncDoc('test')">Start Sync Doc</button>
+  <button ion-button (click)="stopSyncDoc()">Stop SyncDoc</button>
+  <hr>
+  <hr>
+  <hr>
+
+  <ion-list *ngIf="sites">
+
+    <ion-item>count: {{sites.length}}</ion-item>
+    <ion-item *ngFor="let site of sites">
+      Field A:{{site.name}}
+      <br>
+      Field B: {{site.url}}
+      <button ion-button item-right (click)="editSite(site.$id)">Edit</button>
+      <button ion-button item-right (click)="removeSite(site.$id)">Delete</button>
+    </ion-item>
+
+    <ion-item-divider text-center> --</ion-item-divider>
+    <ion-item>
+      <button ion-button id="newButton" (click)="editSite()">New</button>
+    </ion-item>
+    <form id="form" [formGroup]="form" style="display:none;">
+      <ion-item>
+        <ion-label>Field A</ion-label>
+        <ion-input
+          formControlName="name"
+          type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Field B</ion-label>
+        <ion-input
+          formControlName="url"
+          type="text">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button danger (click)="saveSite()">Save</button>
+      </ion-item>
+    </form>
+    <ion-item>
+      <button (click)="cleanup()">Cleanup</button>
+      <button (click)="doPurge()">Purge</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

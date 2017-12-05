@@ -13,7 +13,9 @@
     <ion-item>count: {{sites.length}}</ion-item>
     <ion-item *ngFor="let site of sites">
 
-      Name:{{site.name}} URL: {{site.url}}
+      Field A:{{site.name}}
+      <br>
+      Field B: {{site.url}}
       <button ion-button item-right (click)="editSite(site.$id)">Edit</button>
       <button ion-button item-right (click)="removeSite(site.$id)">Delete</button>
     </ion-item>
@@ -24,14 +26,14 @@
     </ion-item>
     <form id="form" [formGroup]="form" style="display:none;">
       <ion-item>
-        <ion-label>Name</ion-label>
+        <ion-label>Field A</ion-label>
         <ion-input
           formControlName="name"
           type="text">
         </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>URL</ion-label>
+        <ion-label>Field B</ion-label>
         <ion-input
           formControlName="url"
           type="text">
